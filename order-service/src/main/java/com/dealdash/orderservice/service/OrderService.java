@@ -1,6 +1,7 @@
 package com.dealdash.orderservice.service;
 
 
+import com.dealdash.orderservice.dto.InventoryResponse;
 import com.dealdash.orderservice.dto.OrderLineItemsDto;
 import com.dealdash.orderservice.dto.OrderRequest;
 import com.dealdash.orderservice.model.Order;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -32,7 +34,25 @@ public class OrderService {
 
         order.setOrderLineItemsList(orderLineItemsList);
 
-        orderRepository.save(order);
+        List<String> skuCodes = order.getOrderLineItemsList().stream().map(OrderLineItems::getSkuCode).toList();
+
+        // Call Inventory Service, and place the order if it exists in the inventory
+        InventoryResponse[] inventoryResponsesArray = webClient.get().uri("http://localhost:8082/api/inventory",
+                        uriBuilder -> uriBuilder.queryParam("skuCode", skuCodes).build())
+                .retrieve()
+                .bodyToMono(InventoryResponse[].class)
+                .block();
+        if (inventoryResponsesArray == null)
+            throw new IllegalArgumentException("Could not fetch your products");
+
+        boolean allProductsInStock = Arrays.stream(inventoryResponsesArray)
+                .allMatch(InventoryResponse::isInStock);
+        if (allProductsInStock) {
+            orderRepository.save(order);
+
+        } else {
+            throw new IllegalArgumentException("Product is not in stock...");
+        }
 
     }
 
