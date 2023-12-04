@@ -22,6 +22,8 @@ The project consists of the following services:
 
 4. **Notification Service**: This service handles the notifications. It communicates asynchronously with the Order
    Service using Kafka and sends notifications to users when there are updates about their orders.
+   <br><br>
+   <img src="https://private-user-images.githubusercontent.com/110746492/287735484-89175348-f964-4c5c-9e23-7e2c9085cdaa.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDE3MDE2NTEsIm5iZiI6MTcwMTcwMTM1MSwicGF0aCI6Ii8xMTA3NDY0OTIvMjg3NzM1NDg0LTg5MTc1MzQ4LWY5NjQtNGM1Yy05ZTIzLTdlMmM5MDg1Y2RhYS5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBSVdOSllBWDRDU1ZFSDUzQSUyRjIwMjMxMjA0JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDIzMTIwNFQxNDQ5MTFaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT0xYmYxY2M2Njg1NTZlMWY5ZjA1ODMyYWQ1ZmZiMTZkYTEyM2FmNjA2OGU5ZTE2ODU0ZWM1YWQxNzMwOTc2YWQ5JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.F1XIV4R9Q3fakxPJnyWZQu0KayNEO9YjNbm6a3ZR2Bc" style="width: 650px; max-width: 100%; height: auto" />
 
 ## Architecture
 
@@ -41,13 +43,31 @@ The services communicate with each other as follows:
 ## Technologies Used
 
 - **Netflix Eureka**: Used as a discovery server. It allows the services to find each other without hardcoding their
-  locations.
-
+  locations.<br><br>
+    - **Registration**: When a microservice starts, it registers itself with the Eureka server.<br> This registration
+      includes metadata about the service such as host, port, health indicator URL, home page, and other details.<br>
+      The service ID is typically the name of the application. <br><br>
+      <img src="https://private-user-images.githubusercontent.com/110746492/287729145-1a550e97-2f07-44e5-be85-cb838ee1e0c5.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDE3MDAzNzMsIm5iZiI6MTcwMTcwMDA3MywicGF0aCI6Ii8xMTA3NDY0OTIvMjg3NzI5MTQ1LTFhNTUwZTk3LTJmMDctNDRlNS1iZTg1LWNiODM4ZWUxZTBjNS5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBSVdOSllBWDRDU1ZFSDUzQSUyRjIwMjMxMjA0JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDIzMTIwNFQxNDI3NTNaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT02OTdmYTNmNzI5MDNlODdlMTIyNDM1MGVlOWI5YTdmMjQzYWU2OWRmMDNiMTlhNjZmZTMwYjExMGE1MzdlYWQ3JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.LKNkpnKDrqSNp7TnvkgGj8qOJiQ3C_jlWUmbPJchANc" style="width: 650px; max-width: 100%; height: auto" />
+      <br><br>
+    - **Service Discovery**: The Eureka Client fetches the service registry from the Eureka Server and caches it
+      locally.<br>This local cache is then used to discover and invoke services.
+      <br><br>
+      <img src="https://private-user-images.githubusercontent.com/110746492/287730610-5f4749c6-59ff-4456-81c5-781d7e06dc04.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDE3MDEwNTIsIm5iZiI6MTcwMTcwMDc1MiwicGF0aCI6Ii8xMTA3NDY0OTIvMjg3NzMwNjEwLTVmNDc0OWM2LTU5ZmYtNDQ1Ni04MWM1LTc4MWQ3ZTA2ZGMwNC5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBSVdOSllBWDRDU1ZFSDUzQSUyRjIwMjMxMjA0JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDIzMTIwNFQxNDM5MTJaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT01ODM5MTA2MTFkYWNhOTZjYmFiOWRkYjQxZjJhYzcwZDhhNzM0MDBkOGRhNjNjNzdmY2E1MzgwNTQ4YTBiMzI2JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.Qj7NoTa785zbyD01YCT9hu7JCvlPKE7hQs_Z150ilXs" style="width: 650px; max-width: 100%; height: auto" />
+      <br><br>
+    - **Client's local copy of service registry**: The Eureka Client fetches the service registry from the Eureka Server
+      and caches it locally. <br> This local cache is updated periodically (every 30 seconds by default) from the
+      server.
+      <br><br>
+      <img src="https://private-user-images.githubusercontent.com/110746492/287730853-5b692ca8-0896-4d95-9781-595e12f8f9e8.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDE3MDEyNzYsIm5iZiI6MTcwMTcwMDk3NiwicGF0aCI6Ii8xMTA3NDY0OTIvMjg3NzMwODUzLTViNjkyY2E4LTA4OTYtNGQ5NS05NzgxLTU5NWUxMmY4ZjllOC5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBSVdOSllBWDRDU1ZFSDUzQSUyRjIwMjMxMjA0JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDIzMTIwNFQxNDQyNTZaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT0zOTM5MTE3MTFkOGU0ZTc2M2JkNTczNjM1NjlmN2Q4MjlmYzIyNGQ2MzU4NjczYWY0ZTNlNzBhZTM3NWY1M2VlJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.OchgHWO8qiib0rpv4XycfYxnfv7ql38YWCtEJqiagy4" style="width: 650px; max-width: 100%; height: auto" />
+      <br><br>
 - **Spring Cloud Gateway**: Used as an API gateway. It provides a single entry point for the clients and routes their
   requests to the appropriate services.
+  <br><br>
 
 - **Keycloak**: Used as an auth server. It provides authentication and authorization services, ensuring that only
   authenticated and authorized users can access the services.
+  <br><br>
+  <img src="https://private-user-images.githubusercontent.com/110746492/287736347-e55064d2-6b7e-4910-9516-f08b49186511.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDE3MDE4NjUsIm5iZiI6MTcwMTcwMTU2NSwicGF0aCI6Ii8xMTA3NDY0OTIvMjg3NzM2MzQ3LWU1NTA2NGQyLTZiN2UtNDkxMC05NTE2LWYwOGI0OTE4NjUxMS5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBSVdOSllBWDRDU1ZFSDUzQSUyRjIwMjMxMjA0JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDIzMTIwNFQxNDUyNDVaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT05MjlhMzBkZDY4MWVjMmJkNWNiY2NiMTdiYjI5ZWExMDVhYzY3OTgzMzg4N2M3MTJmMTEzMTE2ZTgxMGUzZDA2JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.pzYhSht3epk9PXsg0RkdGpZCMDeUhGX9dLhG31iPjd4" style="width: 650px; max-width: 100%; height: auto" />
 
 ## Setup and Installation
 
