@@ -3,7 +3,7 @@
 This project is a simple online shop backend built using a microservices architecture. The goal of this project is to
 provide a scalable and reliable backend for an online shop.
 
-<img src="https://drive.google.com/file/d/1Sk7FlFOSCoY2GqhmZV8JwxCo7EKkNXpQ/view?usp=sharing" style="width: 650px; max-width: 100%; height: auto" />
+<img src="https://private-user-images.githubusercontent.com/110746492/287725881-5c29ec1e-4c71-47a1-85e7-65f9995b1738.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDE2OTk3NTQsIm5iZiI6MTcwMTY5OTQ1NCwicGF0aCI6Ii8xMTA3NDY0OTIvMjg3NzI1ODgxLTVjMjllYzFlLTRjNzEtNDdhMS04NWU3LTY1Zjk5OTViMTczOC5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBSVdOSllBWDRDU1ZFSDUzQSUyRjIwMjMxMjA0JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDIzMTIwNFQxNDE3MzRaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1mZTBiY2Q4NzUxNjI5YjFkNThmYmZiY2UzZTk4YWZiNGFhMmE4ZWQxZmYyZWRkODI5YjM2YThhY2I3ZmJiNDJmJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.WjlLh4nV3kBXz_snIIFzua3xfaGWVj1sN9wMg8J7fnc" style="width: 650px; max-width: 100%; height: auto" />
 
 ## Services
 
